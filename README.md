@@ -1,4 +1,4 @@
-# vue-click-outside
+# vue-mouse-event-outside
 
 ## usage
 
