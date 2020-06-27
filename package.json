@@ -17,7 +17,18 @@
   },
   "homepage": "https://github.com/syagawa/vue-mouse-event-outside#readme",
   "devDependencies": {
+    "eslint-loader": "^4.0.2",
+    "@babel/core": "^7.10.2",
+    "@babel/plugin-syntax-dynamic-import": "^7.2.0",
+    "@babel/plugin-transform-runtime": "^7.10.1",
+    "@babel/preset-env": "^7.10.2",
+    "@babel/register": "^7.10.1",
+    "@babel/runtime": "^7.10.2",
+    "babel-loader": "^8.1.0",
+    "cross-env": "^7.0.2",
+    "eslint": "^7.2.0",
     "vue": "^2.6.11",
-    "webpack": "^4.43.0"
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.11"
   }
 }
