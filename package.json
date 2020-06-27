@@ -1,0 +1,23 @@
+{
+  "name": "vue-mouse-event-outside",
+  "version": "1.0.0",
+  "description": "## usage",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/syagawa/vue-mouse-event-outside.git"
+  },
+  "author": "syagawa",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/syagawa/vue-mouse-event-outside/issues"
+  },
+  "homepage": "https://github.com/syagawa/vue-mouse-event-outside#readme",
+  "devDependencies": {
+    "vue": "^2.6.11",
+    "webpack": "^4.43.0"
+  }
+}
