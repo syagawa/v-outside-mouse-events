@@ -1,37 +1,81 @@
 <html>
   <head>
     <title>test</title>
-    
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
     <script type="text/javascript" src="./app.js"></script>
 
   </head>
   <body>
-    <div id="app" class="main">
-      <div class="click_area" >
-        Click 1
+    <div id="app">
+      <div class="main">
+        <div class="click_area" @click="click(1)" v-click-outside="clickOutside">
+          Click 1
+        </div>
+        <div class="click_area" @click="click(2)" v-click-outside="clickOutside">
+          Click 2
+        </div>
+        <div class="click_area" @click="click(3)" v-click-outside="clickOutside">
+          Click 3
+        </div>
       </div>
-      <div class="click_area">
-        Click 2
-      </div>
-      <div class="click_area">
-        Click 3
+      <div>
+        {{ message }}
       </div>
     </div>
   </body>
 
+  <script>
+
+    new Vue({
+      el: "#app",
+      data: {
+        outside: false
+      },
+      computed: {
+        message: function(){
+          if(this.outside){
+            return "Click outside !!";
+          }
+        }
+      },
+      methods: {
+        click: function(num){
+          this.outside = false;
+          console.info("Click" , num);
+        },
+        clickOutside: function(){
+          this.outside = true;
+          console.log("Click outside !!");
+        }
+      },
+      directives: {
+        "click-outside": {
+          bind: dir.bind
+        }
+      }
+    })
+
+
+  </script>
+
+
   <style>
     .main{
-      background-color: lightgreen;
+      background-color: #4fc08d;
       display: flex;
       padding: 50px;
       justify-content: space-between;
     }
     .click_area{
       cursor: pointer;
-      background-color: lightpink;
-      border-radius: 3px;
-      padding: 5px;
+      background-color: #fff;
+      padding: 0.75em 2em;
+      border-radius: 2em;
+      display: inline-block;
+      color: #4fc08d;
+      transition: all 0.15s ease;
+      box-sizing: border-box;
+      border: 1px solid #4fc08d;
     }
 
 

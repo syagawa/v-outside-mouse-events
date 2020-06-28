@@ -12,7 +12,7 @@ module.exports = {
   entry: [
     // "core-js/modules/es6.promise",
     // "core-js/modules/es6.array.iterator",
-    "./ref.js"
+    "./index.js"
   ],
   output: {
     filename: "app.js",
