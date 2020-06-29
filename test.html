@@ -8,18 +8,22 @@
   <body>
     <div id="app">
       <div class="main">
-        <div class="click_area" @click="click(1)" v-click-outside="clickOutside">
+        <div class="click_area" @click="click(1)" v-click-outside="clickOutside1">
           Click 1
         </div>
-        <div class="click_area" @click="click(2)" v-click-outside="clickOutside">
+        <div class="click_area" @click="click(2)" v-click-outside="clickOutside2">
           Click 2
         </div>
-        <div class="click_area" @click="click(3)" v-click-outside="clickOutside">
+        <div class="click_area" @click="click(3)" v-click-outside="clickOutside3">
           Click 3
         </div>
       </div>
       <div>
-        {{ message }}
+        <ul>
+          <li v-for="message in outsides">
+            {{message}}
+          </li>
+        </ul>
       </div>
     </div>
   </body>
@@ -29,23 +33,34 @@
     new Vue({
       el: "#app",
       data: {
-        outside: false
+        outsides: []
       },
       computed: {
         message: function(){
-          if(this.outside){
+          if(this.outsides.length > 0){
             return "Click outside !!";
           }
         }
       },
       methods: {
         click: function(num){
-          this.outside = false;
-          console.info("Click" , num);
+          this.outsides.splice(0, this.outsides.length);
+          console.log("Click" , num);
         },
-        clickOutside: function(){
-          this.outside = true;
-          console.log("Click outside !!");
+        clickOutside1: function(){
+          var str = "Click outside 1 !!";
+          this.outsides.push(str);
+          console.log(str);
+        },
+        clickOutside2: function(){
+          var str = "Click outside 2 !!";
+          this.outsides.push(str);
+          console.log(str);
+        },
+        clickOutside3: function(){
+          var str = "Click outside 3 !!";
+          this.outsides.push(str);
+          console.log(str);
         }
       },
       directives: {
