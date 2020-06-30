@@ -6,20 +6,33 @@ const existsWindow = function(){
   return true;
 };
 
+const makeRemoveEvent = function(eventname){
+  const removeEvent = function(handler){
+    if(existsWindow()){
+      window.removeEventListener(eventname, handler);
+    }
+  };
+  return removeEvent;
+};
+
+const makeAddEvent = function(eventname){
+  const addEvent = function(handler){
+    if(existsWindow()){
+      window.addEventListener(eventname, handler);
+    }
+  };
+  return addEvent;
+};
+
+
 const setClickOutside = function(el, binding, vnode, oldVnode){
 
   const cb = binding.value;
 
-  const removeEvent = function(handler){
-    if(existsWindow()){
-      window.removeEventListener("click", handler);
-    }
-  };
-  const addEvent = function(handler){
-    if(existsWindow()){
-      window.addEventListener("click", handler);
-    }
-  };
+  const evtname = "click";
+  const removeEvent = makeRemoveEvent(evtname);
+  const addEvent = makeAddEvent(evtname);
+
   const clickHandler = function(evt){
     const tgt_area = el;
     if(!tgt_area || tgt_area.length === 0){
