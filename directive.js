@@ -5,6 +5,15 @@ const existsWindow = function(){
   }
   return true;
 };
+const existsCallback = function(binding) {
+  if(!binding){
+    return false;
+  }
+  if(binding.value && typeof binding.value === "function"){
+    return true;
+  }
+  return false;
+};
 
 const makeRemoveEvent = function(eventname){
   const removeEvent = function(handler){
@@ -24,26 +33,19 @@ const makeAddEvent = function(eventname){
   return addEvent;
 };
 
+const makeHandler = function(el, cb, removeEvent){
 
-const setClickOutside = function(el, binding, vnode, oldVnode){
-
-  const cb = binding.value;
-
-  const evtname = "click";
-  const removeEvent = makeRemoveEvent(evtname);
-  const addEvent = makeAddEvent(evtname);
-
-  const clickHandler = function(evt){
+  const handler = function(evt){
     const tgt_area = el;
     if(!tgt_area || tgt_area.length === 0){
-      removeEvent(clickHandler);
+      removeEvent(handler);
       return;
     }
     const clicked = evt.path;
     let exists = false;
-    let counter = 0;
+    // let counter = 0;
     for(let i = 0; i < clicked.length; i++){
-      counter++;
+      // counter++;
       const p = clicked[i];
       if(tgt_area === p){
         exists = true;
@@ -52,7 +54,7 @@ const setClickOutside = function(el, binding, vnode, oldVnode){
 
       if(tgt_area instanceof Array){
         for(let j = 0; j < tgt_area.length; j++){
-          counter++;
+          // counter++;
           const elm = tgt_area[j];
           if(elm === p){
             exists = true;
@@ -75,6 +77,24 @@ const setClickOutside = function(el, binding, vnode, oldVnode){
     }
   };
 
+  return handler;
+
+};
+
+const setClickOutside = function(el, binding, vnode, oldVnode){
+
+  if(!existsCallback(binding)){
+    return;
+  }
+
+  const cb = binding.value;
+
+  const evtname = "click";
+  const removeEvent = makeRemoveEvent(evtname);
+  const addEvent = makeAddEvent(evtname);
+
+  const clickHandler = makeHandler(el, cb, removeEvent);
+
   let working = false;
 
   const response = {
@@ -91,7 +111,6 @@ const setClickOutside = function(el, binding, vnode, oldVnode){
   if(!el || !cb){
     return response;
   }
-
 
   removeEvent(clickHandler);
   addEvent(clickHandler);
