@@ -119,20 +119,41 @@ const setClickOutside = function(el, binding, vnode, oldVnode){
 
 };
 
+const temp = {};
+
+const start = function(el, binding, vnode, oldVnode){
+  temp.cache = setClickOutside(el, binding, vnode, oldVnode);
+};
+
+const end = function(){
+  const cancel = temp.cache.cancel;
+  if(typeof cancel === "function"){
+    cancel();
+  }
+  delete temp.cache;
+};
 
 export default {
   bind: function(el, binding, vnode, oldVnode){
 
-    const res = setClickOutside(el, binding, vnode, oldVnode);
+    // console.info("bind", el, binding, vnode, oldVnode);
+    start(el, binding, vnode, oldVnode);
 
   },
   inserted: function(el, binding, vnode, oldVnode){
+    // console.info("inserted", el, binding, vnode, oldVnode);
 
   },
   update: function(el, binding, vnode, oldVnode){
+    // console.info("update", el, binding, vnode, oldVnode);
+    end();
+    start(el, binding, vnode, oldVnode);
   },
   componentUpdated: function(el, binding, vnode, oldVnode){
+    // console.info("componentUpdated", el, binding, vnode, oldVnode);
   },
   unbind: function(el, binding, vnode, oldVnode){
+    // console.info("unbind", el, binding, vnode, oldVnode);
+    end();
   },
 };
