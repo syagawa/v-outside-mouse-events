@@ -8,13 +8,13 @@
   <body>
     <div id="app">
       <div class="main">
-        <div class="click_area" @click="click(1)" v-click-outside="clickOutside1">
+        <div class="click_area" @click="click(1)" v-outside-click="clickOutside1">
           Click 1
         </div>
-        <div class="click_area" @click="click(2)" v-click-outside="clickOutside2">
+        <div class="click_area" @click="click(2)" v-outside-click="clickOutside2">
           Click 2
         </div>
-        <div class="click_area" @click="click(3)" v-click-outside="clickOutside3">
+        <div class="click_area" @click="click(3)" v-outside-click="clickOutside3">
           Click 3
         </div>
       </div>
@@ -64,7 +64,7 @@
         }
       },
       directives: {
-        "click-outside": {
+        "outside-click": {
           bind: dir.bind
         }
       }

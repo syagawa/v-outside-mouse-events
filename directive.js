@@ -81,7 +81,7 @@ const makeHandler = function(el, cb, removeEvent){
 
 };
 
-const setClickOutside = function(el, binding, vnode, oldVnode){
+const setOutside = function(evtname, el, binding, vnode, oldVnode){
 
   if(!existsCallback(binding)){
     return;
@@ -89,7 +89,6 @@ const setClickOutside = function(el, binding, vnode, oldVnode){
 
   const cb = binding.value;
 
-  const evtname = "click";
   const removeEvent = makeRemoveEvent(evtname);
   const addEvent = makeAddEvent(evtname);
 
@@ -122,7 +121,13 @@ const setClickOutside = function(el, binding, vnode, oldVnode){
 const temp = {};
 
 const start = function(el, binding, vnode, oldVnode){
-  temp.cache = setClickOutside(el, binding, vnode, oldVnode);
+
+  const evtname = detectEvent(binding);
+  if(!evtname){
+    return;
+  }
+  temp.evtname = evtname;
+  temp.cache = setOutside(temp.evtname, el, binding, vnode, oldVnode);
 };
 
 const end = function(){
@@ -133,10 +138,37 @@ const end = function(){
   delete temp.cache;
 };
 
+const detectEvent = function(binding){
+
+  if(!binding){
+    return;
+  }
+
+  const name = binding.name;
+  const arr = name.split("-");
+  const evtname = arr.pop();
+  const evts = [
+    "click",
+    "mousedown",
+    "mouseup",
+    "touchstart",
+    "touchend"
+  ];
+
+  const exists = evts.filter(elm => elm === evtname);
+  if(exists){
+    return evtname;
+  }
+  return;
+};
+
+
+
 export default {
   bind: function(el, binding, vnode, oldVnode){
-
+    console.info(this, arguments)
     // console.info("bind", el, binding, vnode, oldVnode);
+
     start(el, binding, vnode, oldVnode);
 
   },
