@@ -1,4 +1,4 @@
-# vue-mouse-event-outside
+# v-outside-events
 
 ## usage
 
