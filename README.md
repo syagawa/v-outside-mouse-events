@@ -5,7 +5,7 @@
 ```html
 <div id="app">
   <div><div>
-  <div @class="click" :ref="area">
+  <div @class="click" v-outside-click="clickOutside">
     click me
   </div>
 </div>
@@ -14,11 +14,20 @@
 
   new Vue({
     el: "#app",
-    mounted: function(){
-      const res = lib.setClickOutside(this, "area", function(){
+    methods: {
+      click: function(){
+        console.log("click");
+      },
+      clickOutside: function(){
         console.log("click outside");
-      });
+      }
+    },
+    directives: {
+      "outside-click": {
+        bind: lib.bind
+      }
     }
+
   });
 
 </script>
