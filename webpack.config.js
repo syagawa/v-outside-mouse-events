@@ -1,4 +1,5 @@
 const path = require("path");
+const webpack = require("webpack");
 
 let ENV = process.env.NODE_ENV;
 console.log(ENV);
@@ -10,14 +11,12 @@ if(ENV !== "production"){
 module.exports = {
   mode: ENV,
   entry: [
-    // "core-js/modules/es6.promise",
-    // "core-js/modules/es6.array.iterator",
     "./index.js"
   ],
   output: {
     filename: "app.js",
     path: path.resolve(__dirname, "./"),
-    library: 'suapp',
+    library: 'v-outside-events',
     libraryExport: "default",
     libraryTarget: "umd",
     globalObject: "this"
@@ -44,7 +43,12 @@ module.exports = {
       }
     ]
   },
-  plugins: [],
+  plugins: [
+    new webpack.ProvidePlugin({
+      // Vue: ['vue/dist/vue.esm.js', 'default']
+      Vue: 'vue/dist/vue.esm.js'
+    }),
+  ],
   resolve: {}
 };
 

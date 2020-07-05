@@ -1,7 +1,5 @@
-import dir from "./directive.js";
+import directive from "./directive.js";
 
-(function(global){
-  if(global){
-    global.dir = dir;
-  }
-})(window);
+export default {
+  directive: directive
+};
