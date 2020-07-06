@@ -33,7 +33,7 @@ const makeAddEvent = function(eventname){
   return addEvent;
 };
 
-const makeHandler = function(el, cb, removeEvent){
+const makeHandler = function(el, removeEvent){
 
   const handler = function(evt){
     const tgt_area = el;
@@ -73,7 +73,8 @@ const makeHandler = function(el, cb, removeEvent){
 
     }
     if(!exists){
-      cb();
+      // cb();
+      executeCallback(el);
     }
   };
 
@@ -92,19 +93,21 @@ const setOutside = function(evtname, el, binding, vnode, oldVnode){
   const removeEvent = makeRemoveEvent(evtname);
   const addEvent = makeAddEvent(evtname);
 
-  const clickHandler = makeHandler(el, cb, removeEvent);
+  const clickHandler = makeHandler(el, removeEvent);
 
   let working = false;
 
   const response = {
-    area_name: el,
+    evtname: evtname,
+    el: el,
     cancel: function(){
       removeEvent(clickHandler);
       working = false;
     },
     get working(){
       return working;
-    }
+    },
+    cb: cb
   };
 
   if(!el || !cb){
@@ -118,7 +121,34 @@ const setOutside = function(evtname, el, binding, vnode, oldVnode){
 
 };
 
-const temp = {};
+const cache = [];
+
+const findTempByElement = function(el){
+  const ind = cache.findIndex(elm => elm.el === el);
+  return {
+    index: ind,
+    temp: cache[ind]
+  };
+};
+
+const executeCallback = function(el){
+  const temp = findTempByElement(el).temp;
+  if(!temp){
+    return;
+  }
+  if(temp.cb && typeof temp.cb === "function"){
+    temp.cb();
+  }
+};
+
+const updateCallback = function(el, cb){
+  if(cb && typeof cb === "function"){
+    const temp = findTempByElement(el).temp;
+    if(temp){
+      temp.cb = cb;
+    }
+  }
+};
 
 const start = function(el, binding, vnode, oldVnode){
 
@@ -126,16 +156,20 @@ const start = function(el, binding, vnode, oldVnode){
   if(!evtname){
     return;
   }
-  temp.evtname = evtname;
-  temp.cache = setOutside(temp.evtname, el, binding, vnode, oldVnode);
+
+  const temp = setOutside(evtname, el, binding, vnode, oldVnode);
+  console.info("instart", temp);
+  cache.push(temp);
 };
 
-const end = function(){
-  const cancel = temp.cache.cancel;
+const end = function(el){
+  const { temp, index } = findTempByElement(el)
+  const cancel = temp.cancel;
   if(typeof cancel === "function"){
     cancel();
   }
-  delete temp.cache;
+  // delete temp.cache;
+  cache.splice(index, 1);
 };
 
 const detectEvent = function(binding){
@@ -181,14 +215,14 @@ export default {
   },
   update: function(el, binding, vnode, oldVnode){
     // console.info("update", el, binding, vnode, oldVnode);
-    end();
-    start(el, binding, vnode, oldVnode);
+    updateCallback(el, binding.value);
+
   },
   componentUpdated: function(el, binding, vnode, oldVnode){
     // console.info("componentUpdated", el, binding, vnode, oldVnode);
   },
   unbind: function(el, binding, vnode, oldVnode){
     // console.info("unbind", el, binding, vnode, oldVnode);
-    end();
+    end(el);
   },
 };
