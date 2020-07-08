@@ -41,12 +41,12 @@ const makeHandler = function(el, removeEvent){
       removeEvent(handler);
       return;
     }
-    const clicked = evt.path;
+    const array = evt.path;
     let exists = false;
     // let counter = 0;
-    for(let i = 0; i < clicked.length; i++){
+    for(let i = 0; i < array.length; i++){
       // counter++;
-      const p = clicked[i];
+      const p = array[i];
       if(tgt_area === p){
         exists = true;
         break;
@@ -168,7 +168,6 @@ const end = function(el){
   if(typeof cancel === "function"){
     cancel();
   }
-  // delete temp.cache;
   cache.splice(index, 1);
 };
 
