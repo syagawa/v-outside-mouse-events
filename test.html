@@ -17,6 +17,9 @@
         <div class="click_area" @click="click(3)" v-outside-click="clickOutside3">
           Click 3
         </div>
+        <div class="click_area" @click="click(4)" v-outside-click="setClickOutside(4)">
+          Click 4
+        </div>
       </div>
       <div>
         <ul>
@@ -61,6 +64,17 @@
           var str = "Click outside 3 !!";
           this.outsides.push(str);
           console.log(str);
+        },
+        clickOutside: function(num){
+          var str = "Click outside " + num + "!!!!!!";
+          console.log(str);
+          this.outsides.push(str);
+        },
+        setClickOutside: function(num){
+          var self = this;
+          return function(){
+            self.clickOutside(num);
+          }
         }
       },
       directives: {
