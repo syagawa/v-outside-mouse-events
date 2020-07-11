@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack",
-    "build-pro": "webpack --config webpack.prod.js"
+    "build-pro": "webpack --config webpack.prod.js",
+    "build-test-import": "webpack --config webpack.test-import.js"
   },
   "repository": {
     "type": "git",

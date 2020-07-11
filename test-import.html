@@ -1,0 +1,58 @@
+<html>
+  <head>
+    <title>test-import</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+
+  </head>
+  <body>
+    <div id="app">
+      <div class="main">
+        <div class="click_area" @click="click(1)" v-outside-click="clickOutside1">
+          Click 1
+        </div>
+        <div class="click_area" @click="click(2)" v-outside-click="clickOutside2">
+          Click 2
+        </div>
+        <div class="click_area" @click="click(3)" v-outside-click="clickOutside3">
+          Click 3
+        </div>
+        <div class="click_area" @click="click(4)" v-outside-click="setClickOutside(4)">
+          Click 4
+        </div>
+      </div>
+      <div>
+        <ul>
+          <li v-for="message in outsides">
+            {{message}}
+          </li>
+        </ul>
+      </div>
+    </div>
+    <script type="text/javascript" src="./dist/test-import.js"></script>
+
+  </body>
+
+  <style>
+    .main{
+      background-color: #4fc08d;
+      display: flex;
+      padding: 50px;
+      justify-content: space-between;
+    }
+    .click_area{
+      cursor: pointer;
+      background-color: #fff;
+      padding: 0.75em 2em;
+      border-radius: 2em;
+      display: inline-block;
+      color: #4fc08d;
+      transition: all 0.15s ease;
+      box-sizing: border-box;
+      border: 1px solid #4fc08d;
+    }
+
+
+  </style>
+
+
+</html>
