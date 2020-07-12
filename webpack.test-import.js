@@ -37,5 +37,10 @@ module.exports = {
       Vue: 'vue/dist/vue.esm.js'
     }),
   ],
-  resolve: {}
+  resolve: {
+    alias: {
+      vue: 'vue/dist/vue.js'
+    }
+  }
+
 };

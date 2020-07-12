@@ -39,7 +39,7 @@ module.exports = {
   plugins: [
     new webpack.ProvidePlugin({
       // Vue: ['vue/dist/vue.esm.js', 'default']
-      Vue: 'vue/dist/vue.esm.js'
+      // Vue: 'vue/dist/vue.esm.js'
     }),
   ],
   resolve: {}
