@@ -11,16 +11,16 @@ module.exports = {
   },
   module: {
     rules: [
-      {
-        enforce: "pre",
-        test: /\.js$/,
-        exclude: /(node_modules)/,
-        loader: "eslint-loader",
-        options: {
-          fix: false,
-          formatter: "stylish" //"codeframe"
-        }
-      },
+      // {
+      //   enforce: "pre",
+      //   test: /\.js$/,
+      //   exclude: /(node_modules | .*outside-events.*)/,
+      //   loader: "eslint-loader",
+      //   options: {
+      //     fix: false,
+      //     formatter: "stylish" //"codeframe"
+      //   }
+      // },
       {
         test: /\.js$/,
         exclude: /(node_modules)/,
@@ -34,7 +34,7 @@ module.exports = {
   plugins: [
     new webpack.ProvidePlugin({
       // Vue: ['vue/dist/vue.esm.js', 'default']
-      Vue: 'vue/dist/vue.esm.js'
+      // Vue: 'vue/dist/vue.esm.js'
     }),
   ],
   resolve: {

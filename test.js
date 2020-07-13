@@ -1,5 +1,6 @@
-import directive from "./directive.js";
+import outside_events from "./outside-events.js";
 import Vue from "vue";
+
 
 new Vue({
   el: "#app",
@@ -53,6 +54,6 @@ new Vue({
   },
 
   directives: {
-    "outside-click": directive
+    "outside-click": outside_events
   }
 });
