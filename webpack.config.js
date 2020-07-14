@@ -11,11 +11,11 @@ if(ENV !== "production"){
 module.exports = {
   mode: ENV,
   entry: [
-    "./index.js"
+    "./src/index.js"
   ],
   output: {
     filename: "app.js",
-    path: path.resolve(__dirname, "./"),
+    path: path.resolve(__dirname, "./dist"),
     library: 'v-outside-events',
     libraryExport: "default",
     libraryTarget: "umd",

@@ -1,4 +1,4 @@
-import outside_events from "./outside-events.js";
+import outside_events from "../dist/outside-events.js";
 import Vue from "vue";
 
 

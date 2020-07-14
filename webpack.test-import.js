@@ -4,23 +4,14 @@ const webpack = require("webpack");
 module.exports = {
   mode: "production",
   entry: [
-    "./test.js"
+    "./src/test.js"
   ],
   output: {
     filename: "test-import.js",
+    path: path.resolve(__dirname, "./dist"),
   },
   module: {
     rules: [
-      // {
-      //   enforce: "pre",
-      //   test: /\.js$/,
-      //   exclude: /(node_modules | .*outside-events.*)/,
-      //   loader: "eslint-loader",
-      //   options: {
-      //     fix: false,
-      //     formatter: "stylish" //"codeframe"
-      //   }
-      // },
       {
         test: /\.js$/,
         exclude: /(node_modules)/,
@@ -32,10 +23,6 @@ module.exports = {
     ]
   },
   plugins: [
-    new webpack.ProvidePlugin({
-      // Vue: ['vue/dist/vue.esm.js', 'default']
-      // Vue: 'vue/dist/vue.esm.js'
-    }),
   ],
   resolve: {
     alias: {

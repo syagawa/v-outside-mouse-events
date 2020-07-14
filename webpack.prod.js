@@ -4,11 +4,11 @@ const webpack = require("webpack");
 module.exports = {
   mode: "production",
   entry: [
-    "./index.js"
+    "./src/index.js"
   ],
   output: {
     filename: "outside-events.js",
-    path: path.resolve(__dirname, "./"),
+    path: path.resolve(__dirname, "./dist"),
     library: 'v-outside-events',
     libraryExport: "default",
     libraryTarget: "umd",
