@@ -213,7 +213,7 @@ export default {
 
   },
   update: function(el, binding, vnode, oldVnode){
-    // console.info("update", el, binding, vnode, oldVnode);
+    console.info("update", el, binding, vnode, oldVnode);
     updateCallback(el, binding.value);
 
   },
@@ -221,7 +221,7 @@ export default {
     // console.info("componentUpdated", el, binding, vnode, oldVnode);
   },
   unbind: function(el, binding, vnode, oldVnode){
-    // console.info("unbind", el, binding, vnode, oldVnode);
+    console.info("unbind", el, binding, vnode, oldVnode);
     end(el);
   },
 };

@@ -3,22 +3,24 @@
     <title>test</title>
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
     <script type="text/javascript" src="../dist/outside-events.js"></script>
-
   </head>
   <body>
     <div id="app">
       <div class="main">
-        <div class="click_area" @click="click(1)" v-outside-click="clickOutside1">
+        <div class="click_area" @click="click(1)" v-outside-click="clickOutside1" v-if="show">
           Click 1
         </div>
-        <div class="click_area" @click="click(2)" v-outside-click="clickOutside2">
+        <div class="click_area" @click="click(2)" v-outside-click="clickOutside2" v-if="show">
           Click 2
         </div>
-        <div class="click_area" @click="click(3)" v-outside-click="clickOutside3">
+        <div class="click_area" @click="click(3)" v-outside-click="clickOutside3" v-if="show">
           Click 3
         </div>
-        <div class="click_area" @click="click(4)" v-outside-click="setClickOutside(4)">
+        <div class="click_area" @click="click(4)" v-outside-click="setClickOutside(4)" v-if="show">
           Click 4
+        </div>
+        <div class="click_area" @click="clickUnbind">
+          switch
         </div>
       </div>
       <div>
@@ -36,7 +38,8 @@
     new Vue({
       el: "#app",
       data: {
-        outsides: []
+        outsides: [],
+        show: true
       },
       computed: {
         message: function(){
@@ -75,7 +78,13 @@
           return function(){
             self.clickOutside(num);
           }
+        },
+        clickUnbind: function(){
+          this.show = !this.show;
         }
+      },
+      mounted: function(){
+        window.app = this;
       },
       directives: {
         "outside-click": window["v-outside-events"]
