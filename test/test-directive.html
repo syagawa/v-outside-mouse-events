@@ -19,11 +19,11 @@
         <div class="click_area" @click="click(4)" v-outside-click="setClickOutside(4)" v-if="show">
           Click 4
         </div>
-        <div class="click_area" @click="clickUnbind">
+      </div>
+      <div class="sub">
+        <div class="switch" @click="clickUnbind">
           switch
         </div>
-      </div>
-      <div>
         <ul>
           <li v-for="message in outsides">
             {{message}}
@@ -112,6 +112,21 @@
       transition: all 0.15s ease;
       box-sizing: border-box;
       border: 1px solid #4fc08d;
+    }
+    .sub{
+      padding: 50px;
+      justify-content: space-between;
+    }
+    .switch{
+      cursor: pointer;
+      background-color: #ddd;
+      padding: 0.75em 2em;
+      border-radius: 2em;
+      display: inline-block;
+      color: #333;
+      transition: all 0.15s ease;
+      box-sizing: border-box;
+      border: 1px solid #ddd;
     }
 
 
