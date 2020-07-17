@@ -151,14 +151,11 @@ const updateCallback = function(el, cb){
 };
 
 const start = function(el, binding, vnode, oldVnode){
-
   const evtname = detectEvent(binding);
   if(!evtname){
     return;
   }
-
   const temp = setOutside(evtname, el, binding, vnode, oldVnode);
-  console.info("instart", temp);
   cache.push(temp);
 };
 
@@ -202,7 +199,7 @@ const detectEvent = function(binding){
 
 export default {
   bind: function(el, binding, vnode, oldVnode){
-    console.info(this, arguments)
+    // console.info(this, arguments);
     // console.info("bind", el, binding, vnode, oldVnode);
 
     start(el, binding, vnode, oldVnode);
@@ -213,7 +210,7 @@ export default {
 
   },
   update: function(el, binding, vnode, oldVnode){
-    console.info("update", el, binding, vnode, oldVnode);
+    // console.info("update", el, binding, vnode, oldVnode);
     updateCallback(el, binding.value);
 
   },
@@ -221,7 +218,7 @@ export default {
     // console.info("componentUpdated", el, binding, vnode, oldVnode);
   },
   unbind: function(el, binding, vnode, oldVnode){
-    console.info("unbind", el, binding, vnode, oldVnode);
+    // console.info("unbind", el, binding, vnode, oldVnode);
     end(el);
   },
 };
