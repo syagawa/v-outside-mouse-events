@@ -1,0 +1,142 @@
+<html>
+  <head>
+    <title>test</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script type="text/javascript" src="../dist/outside-events.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <div class="main">
+        <div class="click_area" @click="click(1)" v-outside-click="clickOutside1" v-if="show">
+          Click 1
+        </div>
+        <div class="click_area" @click="click(2)" v-outside-click="clickOutside2" v-if="show">
+          Click 2
+        </div>
+        <div class="click_area" @click="click(3)" v-outside-click="clickOutside3" v-if="show">
+          Click 3
+        </div>
+        <div class="click_area" @click="click(4)" v-outside-click="setClickOutside(4)" v-if="show">
+          Click 4
+        </div>
+      </div>
+      <div class="sub">
+        <div class="switch" @click="clickUnbind">
+          switch
+        </div>
+        <ul>
+          <li v-for="message in outsides">
+            {{message}}
+          </li>
+        </ul>
+      </div>
+    </div>
+  </body>
+
+  <script>
+
+    var directive = window["v-outside-events"];
+    var vOutsideEvents = {
+      directive: directive,
+      install: function(Vue, options){
+        Vue.install("v-outside-events", directive);
+      }
+    };
+    Vue.use(vOutsideEvents)
+
+    new Vue({
+      el: "#app",
+      data: {
+        outsides: [],
+        show: true
+      },
+      computed: {
+        message: function(){
+          if(this.outsides.length > 0){
+            return "Click outside !!";
+          }
+        }
+      },
+      methods: {
+        click: function(num){
+          this.outsides.splice(0, this.outsides.length);
+          console.log("Click" , num);
+        },
+        clickOutside1: function(){
+          var str = "Click outside 1 !!";
+          this.outsides.push(str);
+          console.log(str);
+        },
+        clickOutside2: function(){
+          var str = "Click outside 2 !!";
+          this.outsides.push(str);
+          console.log(str);
+        },
+        clickOutside3: function(){
+          var str = "Click outside 3 !!";
+          this.outsides.push(str);
+          console.log(str);
+        },
+        clickOutside: function(num){
+          var str = "Click outside " + num + "!!!!!!";
+          console.log(str);
+          this.outsides.push(str);
+        },
+        setClickOutside: function(num){
+          var self = this;
+          return function(){
+            self.clickOutside(num);
+          }
+        },
+        clickUnbind: function(){
+          this.show = !this.show;
+        }
+      },
+      mounted: function(){
+        window.app = this;
+      }
+    });
+
+
+  </script>
+
+
+  <style>
+    .main{
+      background-color: #4fc08d;
+      display: flex;
+      padding: 50px;
+      justify-content: space-between;
+    }
+    .click_area{
+      cursor: pointer;
+      background-color: #fff;
+      padding: 0.75em 2em;
+      border-radius: 2em;
+      display: inline-block;
+      color: #4fc08d;
+      transition: all 0.15s ease;
+      box-sizing: border-box;
+      border: 1px solid #4fc08d;
+    }
+    .sub{
+      padding: 50px;
+      justify-content: space-between;
+    }
+    .switch{
+      cursor: pointer;
+      background-color: #ddd;
+      padding: 0.75em 2em;
+      border-radius: 2em;
+      display: inline-block;
+      color: #333;
+      transition: all 0.15s ease;
+      box-sizing: border-box;
+      border: 1px solid #ddd;
+    }
+
+
+  </style>
+
+
+</html>
