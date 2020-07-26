@@ -35,22 +35,7 @@
 
   <script>
 
-    var directive = window["v-outside-events"];
-    var setOutsideEvent = function(type){
-      const default_type = "click";
-      let str = "outside-";
-      if(!type){
-        str += default_type;
-      }else{
-        str += type;
-      }
-      return o = {
-        install :function(Vue, options){
-          Vue.directive(str, directive);
-        }
-      };
-    };
-    Vue.use(setOutsideEvent("click"));
+    Vue.use(window["v-outside-events"].setOutsideEvent("click"));
 
     new Vue({
       el: "#app",

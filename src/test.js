@@ -1,6 +1,6 @@
-import outside_events from "../dist/outside-events.js";
+// import outside_events from "../dist/outside-events.js";
+import { directive } from "../dist/outside-events.js";
 import Vue from "vue";
-
 
 new Vue({
   el: "#app",
@@ -54,6 +54,6 @@ new Vue({
   },
 
   directives: {
-    "outside-click": outside_events
+    "outside-click": directive
   }
 });
