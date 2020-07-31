@@ -7,7 +7,7 @@
   <body>
     <div id="app">
       <div class="main">
-        <div class="click_area" @click="click(1)" v-outside-click="clickOutside1" v-if="show">
+        <div class="click_area" @click="click(1)" v-outside-click="clickOutside1" v-outside-mouseover="hoverOutside1" v-if="show">
           Click 1
         </div>
         <div class="click_area" @click="click(2)" v-outside-click="clickOutside2" v-if="show">
@@ -58,6 +58,11 @@
           this.outsides.push(str);
           console.log(str);
         },
+        hoverOutside1: function(){
+          var str = "Hover outside 1 !!";
+          this.outsides.push(str);
+          console.log(str);
+        },
         clickOutside2: function(){
           var str = "Click outside 2 !!";
           this.outsides.push(str);
@@ -87,7 +92,8 @@
         window.app = this;
       },
       directives: {
-        "outside-click": window["v-outside-events"].directive
+        "outside-click": window["v-outside-events"].directive,
+        "outside-mouseover": window["v-outside-events"].directive
       }
     });
 
