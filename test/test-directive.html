@@ -7,17 +7,14 @@
   <body>
     <div id="app">
       <div class="main">
-        <div class="click_area" @click="click(1)" v-outside-click="clickOutside1" v-outside-mouseover="hoverOutside1" v-if="show">
+        <div class="click_area" @click="click(1)" v-outside-click="clickOutside1" v-if="show">
           Click 1
         </div>
-        <div class="click_area" @click="click(2)" v-outside-click="clickOutside2" v-if="show">
+        <div class="click_area" @click="click(2)" v-outside-click="setClickOutside(2)" v-if="show">
           Click 2
         </div>
-        <div class="click_area" @click="click(3)" v-outside-click="clickOutside3" v-if="show">
-          Click 3
-        </div>
-        <div class="click_area" @click="click(4)" v-outside-click="setClickOutside(4)" v-if="show">
-          Click 4
+        <div class="click_area" v-outside-mouseover="hoverOutside" v-if="show">
+          Hover
         </div>
       </div>
       <div class="sub">
@@ -58,31 +55,21 @@
           this.outsides.push(str);
           console.log(str);
         },
-        hoverOutside1: function(){
-          var str = "Hover outside 1 !!";
-          this.outsides.push(str);
-          console.log(str);
-        },
-        clickOutside2: function(){
-          var str = "Click outside 2 !!";
-          this.outsides.push(str);
-          console.log(str);
-        },
-        clickOutside3: function(){
-          var str = "Click outside 3 !!";
-          this.outsides.push(str);
-          console.log(str);
-        },
         clickOutside: function(num){
-          var str = "Click outside " + num + "!!!!!!";
-          console.log(str);
+          var str = "Click outside" + num + "!!";
           this.outsides.push(str);
+          console.log(str);
         },
         setClickOutside: function(num){
           var self = this;
           return function(){
             self.clickOutside(num);
           }
+        },
+        hoverOutside: function(){
+          var str = "Hover outside !!";
+          this.outsides.push(str);
+          console.log(str);
         },
         clickUnbind: function(){
           this.show = !this.show;
@@ -93,7 +80,13 @@
       },
       directives: {
         "outside-click": window["v-outside-events"].directive,
-        "outside-mouseover": window["v-outside-events"].directive
+        "outside-mousedown": window["v-outside-events"].directive,
+        "outside-mouseup": window["v-outside-events"].directive,
+        "outside-mouseenter": window["v-outside-events"].directive,
+        "outside-mouseover": window["v-outside-events"].directive,
+        "outside-mousemove": window["v-outside-events"].directive,
+        "outside-touchstart": window["v-outside-events"].directive,
+        "outside-touchend": window["v-outside-events"].directive,
       }
     });
 
