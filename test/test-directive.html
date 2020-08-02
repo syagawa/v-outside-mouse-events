@@ -16,6 +16,9 @@
         <div class="click_area" v-outside-mouseover="hoverOutside" v-if="show">
           Hover
         </div>
+        <div class="click_area" v-outside-mousedown="mousedownOutside" v-if="show">
+          Mousedown
+        </div>
       </div>
       <div class="sub">
         <div class="switch" @click="clickUnbind">
@@ -68,6 +71,11 @@
         },
         hoverOutside: function(){
           var str = "Hover outside !!";
+          this.outsides.push(str);
+          console.log(str);
+        },
+        mousedownOutside: function(){
+          var str = "mousedown outside !!";
           this.outsides.push(str);
           console.log(str);
         },
