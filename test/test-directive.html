@@ -7,23 +7,35 @@
   <body>
     <div id="app">
       <div class="main">
-        <div class="click_area" @click="click(1)" v-outside-click="clickOutside1" v-if="show">
-          Click 1
+        <div class="button" @click="click" v-outside-click="clickOutside" v-if="default_event === 'click'">
+          Click
         </div>
-        <div class="click_area" @click="click(2)" v-outside-click="setClickOutside(2)" v-if="show">
-          Click 2
-        </div>
-        <div class="click_area" v-outside-mouseover="hoverOutside" v-if="show">
-          Hover
-        </div>
-        <div class="click_area" v-outside-mousedown="mousedownOutside" v-if="show">
+        <div class="button" @mousedown="mousedown" v-outside-mousedown="mousedownOutside" v-if="default_event === 'mousedown'">
           Mousedown
         </div>
+        <div class="button" @mouseup="mouseup" v-outside-mouseup="mouseupOutside" v-if="default_event === 'mouseup'">
+          mouseup
+        </div>
+        <div class="button" @mouseenter="mouseenter" v-outside-mouseenter="mouseenterOutside" v-if="default_event === 'mouseenter'">
+          mouseenter
+        </div>
+        <div class="button" @mouseover="mouseover" v-outside-mouseover="mouseoverOutside" v-if="default_event === 'mouseover'">
+          mouseover
+        </div>
+        <div class="button" @mousemove="mousemove" v-outside-mousemove="mousemoveOutside" v-if="default_event === 'mousemove'">
+          mousemove
+        </div>
+        <div class="button" @touchstart="touchstart" v-outside-touchstart="touchstartOutside" v-if="default_event === 'touchstart'">
+          touchstart
+        </div>
+        <div class="button" @touchend="touchend" v-outside-touchend="touchendOutside" v-if="default_event === 'touchend'">
+          touchend
+        </div>
+        <select v-model="default_event">
+          <option v-for="o in options">{{ o }}</option>
+        </select>
       </div>
       <div class="sub">
-        <div class="switch" @click="clickUnbind">
-          switch
-        </div>
         <ul>
           <li v-for="message in outsides">
             {{message}}
@@ -39,7 +51,18 @@
       el: "#app",
       data: {
         outsides: [],
-        show: true
+        show: true,
+        default_event: "click",
+        options: [
+          "click",
+          "mousedown",
+          "mouseup",
+          "mouseenter",
+          "mouseover",
+          "mousemove",
+          "touchstart",
+          "touchend"
+        ]
       },
       computed: {
         message: function(){
@@ -49,17 +72,36 @@
         }
       },
       methods: {
+
         click: function(num){
-          this.outsides.splice(0, this.outsides.length);
-          console.log("Click" , num);
+          console.log("click");
         },
-        clickOutside1: function(){
-          var str = "Click outside 1 !!";
-          this.outsides.push(str);
-          console.log(str);
+        mousedown: function(num){
+          console.log("mousedown");
         },
+        mouseup: function(num){
+          console.log("mouseup");
+        },
+        mouseenter: function(num){
+          console.log("mouseenter");
+        },
+        mouseover: function(num){
+          console.log("mouseover");
+        },
+        mousemove: function(num){
+          console.log("mousemove");
+        },
+        touchstart: function(num){
+          console.log("touchstart");
+        },
+        touchstart: function(num){
+          console.log("touchstart");
+        },
+
+
+
         clickOutside: function(num){
-          var str = "Click outside" + num + "!!";
+          var str = "Click outside !!";
           this.outsides.push(str);
           console.log(str);
         },
@@ -69,13 +111,43 @@
             self.clickOutside(num);
           }
         },
-        hoverOutside: function(){
-          var str = "Hover outside !!";
+        mouseenterOutside: function(){
+          var str = "mouseenter outside !!";
           this.outsides.push(str);
           console.log(str);
         },
         mousedownOutside: function(){
           var str = "mousedown outside !!";
+          this.outsides.push(str);
+          console.log(str);
+        },
+        mouseupOutside: function(){
+          var str = "mouseup outside !!";
+          this.outsides.push(str);
+          console.log(str);
+        },
+        mouseupOutside: function(){
+          var str = "mouseup outside !!";
+          this.outsides.push(str);
+          console.log(str);
+        },
+        mouseoverOutside: function(){
+          var str = "mouseover outside !!";
+          this.outsides.push(str);
+          console.log(str);
+        },
+        mousemoveOutside: function(){
+          var str = "mousemove outside !!";
+          this.outsides.push(str);
+          console.log(str);
+        },
+        touchstartOutside: function(){
+          var str = "touchstart outside !!";
+          this.outsides.push(str);
+          console.log(str);
+        },
+        touchendOutside: function(){
+          var str = "touchend outside !!";
           this.outsides.push(str);
           console.log(str);
         },
@@ -109,7 +181,7 @@
       padding: 50px;
       justify-content: space-between;
     }
-    .click_area{
+    .button{
       cursor: pointer;
       background-color: #fff;
       padding: 0.75em 2em;
