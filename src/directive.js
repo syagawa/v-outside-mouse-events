@@ -181,7 +181,6 @@ const detectEvent = function(binding){
     "click",
     "mousedown",
     "mouseup",
-    "mouseenter",
     "mouseover",
     "mousemove",
     "touchstart",

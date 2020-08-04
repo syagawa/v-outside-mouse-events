@@ -16,9 +16,6 @@
         <div class="button" @mouseup="mouseup" v-outside-mouseup="mouseupOutside" v-if="default_event === 'mouseup'">
           mouseup
         </div>
-        <div class="button" @mouseenter="mouseenter" v-outside-mouseenter="mouseenterOutside" v-if="default_event === 'mouseenter'">
-          mouseenter
-        </div>
         <div class="button" @mouseover="mouseover" v-outside-mouseover="mouseoverOutside" v-if="default_event === 'mouseover'">
           mouseover
         </div>
@@ -28,10 +25,10 @@
         <div class="button" @touchstart="touchstart" v-outside-touchstart="touchstartOutside" v-if="default_event === 'touchstart'">
           touchstart
         </div>
-        <div class="button" @touchend="touchend" v-outside-touchend="touchendOutside" v-if="default_event === 'touchend'">
+        <div class="button" v-outside-touchend="touchendOutside" v-if="default_event === 'touchend'">
           touchend
         </div>
-        <select v-model="default_event">
+        <select v-model="default_event" @change="change">
           <option v-for="o in options">{{ o }}</option>
         </select>
       </div>
@@ -57,22 +54,16 @@
           "click",
           "mousedown",
           "mouseup",
-          "mouseenter",
           "mouseover",
           "mousemove",
           "touchstart",
           "touchend"
         ]
       },
-      computed: {
-        message: function(){
-          if(this.outsides.length > 0){
-            return "Click outside !!";
-          }
-        }
-      },
       methods: {
-
+        change(){
+          this.outsides = [];
+        },
         click: function(num){
           console.log("click");
         },
@@ -81,9 +72,6 @@
         },
         mouseup: function(num){
           console.log("mouseup");
-        },
-        mouseenter: function(num){
-          console.log("mouseenter");
         },
         mouseover: function(num){
           console.log("mouseover");
@@ -97,9 +85,6 @@
         touchstart: function(num){
           console.log("touchstart");
         },
-
-
-
         clickOutside: function(num){
           var str = "Click outside !!";
           this.outsides.push(str);
@@ -110,11 +95,6 @@
           return function(){
             self.clickOutside(num);
           }
-        },
-        mouseenterOutside: function(){
-          var str = "mouseenter outside !!";
-          this.outsides.push(str);
-          console.log(str);
         },
         mousedownOutside: function(){
           var str = "mousedown outside !!";
@@ -162,7 +142,6 @@
         "outside-click": window["v-outside-events"].directive,
         "outside-mousedown": window["v-outside-events"].directive,
         "outside-mouseup": window["v-outside-events"].directive,
-        "outside-mouseenter": window["v-outside-events"].directive,
         "outside-mouseover": window["v-outside-events"].directive,
         "outside-mousemove": window["v-outside-events"].directive,
         "outside-touchstart": window["v-outside-events"].directive,
