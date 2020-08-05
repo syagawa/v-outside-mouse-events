@@ -184,7 +184,10 @@ const detectEvent = function(binding){
     "mouseover",
     "mousemove",
     "touchstart",
-    "touchend"
+    "touchend",
+    // "mouseleave",
+    // "mouseout",
+    // "mouseenter",
   ];
 
   const exists = evts.filter(elm => elm === evtname);

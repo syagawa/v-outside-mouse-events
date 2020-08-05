@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
   <head>
     <title>test</title>
@@ -57,7 +58,10 @@
           "mouseover",
           "mousemove",
           "touchstart",
-          "touchend"
+          "touchend",
+          // "mouseleave",
+          // "mouseout",
+          // "mouseenter",
         ]
       },
       methods: {
@@ -78,6 +82,15 @@
         },
         mousemove: function(num){
           console.log("mousemove");
+        },
+        mouseleave: function(num){
+          console.log("mouseleave");
+        },
+        mouseout: function(num){
+          console.log("mouseout");
+        },
+        mouseenter: function(num){
+          console.log("mouseenter");
         },
         touchstart: function(num){
           console.log("touchstart");
@@ -121,6 +134,23 @@
           this.outsides.push(str);
           console.log(str);
         },
+        mouseleaveOutside: function(){
+          var str = "mouseleave outside !!";
+          this.outsides.push(str);
+          console.log(str);
+        },
+        mouseoutOutside: function(){
+          var str = "mouseout outside !!";
+          this.outsides.push(str);
+          console.log(str);
+        },
+        mouseenterOutside: function(){
+          var str = "mouseenter outside !!";
+          this.outsides.push(str);
+          console.log(str);
+        },
+
+
         touchstartOutside: function(){
           var str = "touchstart outside !!";
           this.outsides.push(str);
