@@ -1,5 +1,9 @@
 # v-outside-events
 
+Vue directive, mouse / touch event outside element.
+
+
+
 ## usage
 
 ```html
