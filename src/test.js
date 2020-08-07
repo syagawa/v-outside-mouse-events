@@ -5,55 +5,125 @@ import Vue from "vue";
 new Vue({
   el: "#app",
   data: {
-    outsides: []
-  },
-  computed: {
-    message: function(){
-      if(this.outsides.length > 0){
-        return "Click outside !!";
-      }
-    }
+    outsides: [],
+    show: true,
+    default_event: "click",
+    options: [
+      "click",
+      "mousedown",
+      "mouseup",
+      "mouseover",
+      "mousemove",
+      "touchstart",
+      "touchend",
+      // "mouseleave",
+      // "mouseout",
+      // "mouseenter",
+    ]
   },
   methods: {
+    change(){
+      this.outsides = [];
+    },
     click: function(num){
-      this.outsides.splice(0, this.outsides.length);
-      console.log("Click" , num);
+      console.log("click");
     },
-    clickOutside1: function(){
-      var str = "Click outside 1 !!";
-      this.outsides.push(str);
-      console.log(str);
+    mousedown: function(num){
+      console.log("mousedown");
     },
-    clickOutside2: function(){
-      var str = "Click outside 2 !!";
-      this.outsides.push(str);
-      console.log(str);
+    mouseup: function(num){
+      console.log("mouseup");
     },
-    clickOutside3: function(){
-      var str = "Click outside 3 !!";
-      this.outsides.push(str);
-      console.log(str);
+    mouseover: function(num){
+      console.log("mouseover");
+    },
+    mousemove: function(num){
+      console.log("mousemove");
+    },
+    mouseleave: function(num){
+      console.log("mouseleave");
+    },
+    mouseout: function(num){
+      console.log("mouseout");
+    },
+    mouseenter: function(num){
+      console.log("mouseenter");
+    },
+    touchstart: function(num){
+      console.log("touchstart");
     },
     clickOutside: function(num){
-      var str = "Click outside " + num + "!!!!!!";
-      console.log(str);
+      var str = "Click outside !!";
       this.outsides.push(str);
+      console.log(str);
     },
     setClickOutside: function(num){
       var self = this;
       return function(){
         self.clickOutside(num);
       }
+    },
+    mousedownOutside: function(){
+      var str = "mousedown outside !!";
+      this.outsides.push(str);
+      console.log(str);
+    },
+    mouseupOutside: function(){
+      var str = "mouseup outside !!";
+      this.outsides.push(str);
+      console.log(str);
+    },
+    mouseoverOutside: function(){
+      var str = "mouseover outside !!";
+      this.outsides.push(str);
+      console.log(str);
+    },
+    mousemoveOutside: function(){
+      var str = "mousemove outside !!";
+      this.outsides.push(str);
+      console.log(str);
+    },
+    mouseleaveOutside: function(){
+      var str = "mouseleave outside !!";
+      this.outsides.push(str);
+      console.log(str);
+    },
+    mouseoutOutside: function(){
+      var str = "mouseout outside !!";
+      this.outsides.push(str);
+      console.log(str);
+    },
+    mouseenterOutside: function(){
+      var str = "mouseenter outside !!";
+      this.outsides.push(str);
+      console.log(str);
+    },
+
+
+    touchstartOutside: function(){
+      var str = "touchstart outside !!";
+      this.outsides.push(str);
+      console.log(str);
+    },
+    touchendOutside: function(){
+      var str = "touchend outside !!";
+      this.outsides.push(str);
+      console.log(str);
+    },
+    clickUnbind: function(){
+      this.show = !this.show;
     }
   },
   mounted: function(){
-    console.info("mounted");
+    window.app = this;
   },
-  created: function(){
-    console.info("created");
-  },
-
   directives: {
-    "outside-click": directive
+    "outside-click": directive,
+    "outside-mousedown": directive,
+    "outside-mouseup": directive,
+    "outside-mouseover": directive,
+    "outside-mousemove": directive,
+    "outside-touchstart": directive,
+    "outside-touchend": directive,
   }
 });

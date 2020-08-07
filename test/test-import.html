@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
   <head>
     <title>test-import</title>
@@ -5,20 +6,32 @@
   <body>
     <div id="app">
       <div class="main">
-        <div class="click_area" @click="click(1)" v-outside-click="clickOutside1">
-          Click 1
+        <div class="button" @click="click" v-outside-click="clickOutside" v-if="default_event === 'click'">
+          Click
         </div>
-        <div class="click_area" @click="click(2)" v-outside-click="clickOutside2">
-          Click 2
+        <div class="button" @mousedown="mousedown" v-outside-mousedown="mousedownOutside" v-if="default_event === 'mousedown'">
+          Mousedown
         </div>
-        <div class="click_area" @click="click(3)" v-outside-click="clickOutside3">
-          Click 3
+        <div class="button" @mouseup="mouseup" v-outside-mouseup="mouseupOutside" v-if="default_event === 'mouseup'">
+          mouseup
         </div>
-        <div class="click_area" @click="click(4)" v-outside-click="setClickOutside(4)">
-          Click 4
+        <div class="button" @mouseover="mouseover" v-outside-mouseover="mouseoverOutside" v-if="default_event === 'mouseover'">
+          mouseover
         </div>
+        <div class="button" @mousemove="mousemove" v-outside-mousemove="mousemoveOutside" v-if="default_event === 'mousemove'">
+          mousemove
+        </div>
+        <div class="button" @touchstart="touchstart" v-outside-touchstart="touchstartOutside" v-if="default_event === 'touchstart'">
+          touchstart
+        </div>
+        <div class="button" v-outside-touchend="touchendOutside" v-if="default_event === 'touchend'">
+          touchend
+        </div>
+        <select v-model="default_event" @change="change">
+          <option v-for="o in options">{{ o }}</option>
+        </select>
       </div>
-      <div>
+      <div class="sub">
         <ul>
           <li v-for="message in outsides">
             {{message}}
@@ -35,7 +48,7 @@
       padding: 50px;
       justify-content: space-between;
     }
-    .click_area{
+    .button{
       cursor: pointer;
       background-color: #fff;
       padding: 0.75em 2em;
@@ -46,5 +59,23 @@
       box-sizing: border-box;
       border: 1px solid #4fc08d;
     }
+    .sub{
+      padding: 50px;
+      justify-content: space-between;
+    }
+    .switch{
+      cursor: pointer;
+      background-color: #ddd;
+      padding: 0.75em 2em;
+      border-radius: 2em;
+      display: inline-block;
+      color: #333;
+      transition: all 0.15s ease;
+      box-sizing: border-box;
+      border: 1px solid #ddd;
+    }
+
+
   </style>
+
 </html>
