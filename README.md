@@ -2,9 +2,9 @@
 
 Vue directive, mouse / touch event outside element.
 
-
-
 ## usage
+
+#### load from Vue app / component
 
 ```html
 <div id="app">
