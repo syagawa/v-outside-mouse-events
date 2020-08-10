@@ -27,9 +27,7 @@ Vue directive, mouse / touch event outside element.
       }
     },
     directives: {
-      "outside-click": {
-        bind: lib.bind
-      }
+      "outside-click": window["v-outside-events"].directive
     }
 
   });
