@@ -4,7 +4,7 @@ Vue directive, mouse / touch event outside element.
 
 ## usage
 
-#### load from Vue app / component
+#### directives
 
 ```html
 <div id="app">
@@ -13,8 +13,8 @@ Vue directive, mouse / touch event outside element.
     click me
   </div>
 </div>
+<script type="text/javascript" src="path/to/outside-events.js"></script>
 <script>
-  import lib from "./index.js";
 
   new Vue({
     el: "#app",
@@ -28,6 +28,37 @@ Vue directive, mouse / touch event outside element.
     },
     directives: {
       "outside-click": window["v-outside-events"].directive
+    }
+
+  });
+
+</script>
+
+```
+
+#### Vue.use
+
+```html
+<div id="app">
+  <div><div>
+  <div @class="click" v-outside-click="clickOutside">
+    click me
+  </div>
+</div>
+<script type="text/javascript" src="path/to/outside-events.js"></script>
+<script>
+
+  Vue.use(window["v-outside-events"].setOutsideEvent("click"));
+
+  new Vue({
+    el: "#app",
+    methods: {
+      click: function(){
+        console.log("click");
+      },
+      clickOutside: function(){
+        console.log("click outside");
+      }
     }
 
   });
