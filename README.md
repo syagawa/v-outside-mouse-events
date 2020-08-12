@@ -2,9 +2,26 @@
 
 Vue directive, mouse / touch event outside element.
 
+
+## load
+
+### script tag
+
+```html
+<script type="text/javascript" src="path/to/outside-events.js"></script>
+```
+
+### import
+
+```javascript
+import { directive } from "../dist/outside-events.js";
+```
+
+
+
 ## usage
 
-#### directives
+### directives
 
 ```html
 <div id="app">
@@ -36,7 +53,7 @@ Vue directive, mouse / touch event outside element.
 
 ```
 
-#### Vue.use
+### Vue.use
 
 ```html
 <div id="app">
