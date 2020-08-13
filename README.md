@@ -7,6 +7,7 @@ Vue directive, mouse / touch event outside element.
 
 ### script tag
 
+
 ```html
 <script type="text/javascript" src="path/to/outside-events.js"></script>
 ```
@@ -14,9 +15,8 @@ Vue directive, mouse / touch event outside element.
 ### import
 
 ```javascript
-import { directive } from "../dist/outside-events.js";
+import { directive } from "path/to//outside-events.js";
 ```
-
 
 
 ## usage
@@ -33,6 +33,8 @@ import { directive } from "../dist/outside-events.js";
 <script type="text/javascript" src="path/to/outside-events.js"></script>
 <script>
 
+  import { directive } from "path/to//outside-events.js";
+
   new Vue({
     el: "#app",
     methods: {
@@ -45,6 +47,7 @@ import { directive } from "../dist/outside-events.js";
     },
     directives: {
       "outside-click": window["v-outside-events"].directive
+      // "outside-click": directive
     }
 
   });
@@ -65,7 +68,10 @@ import { directive } from "../dist/outside-events.js";
 <script type="text/javascript" src="path/to/outside-events.js"></script>
 <script>
 
+  import { directive } from "path/to//outside-events.js";
+
   Vue.use(window["v-outside-events"].setOutsideEvent("click"));
+  // Vue.use(directive.setOutsideEvent("click"));
 
   new Vue({
     el: "#app",
