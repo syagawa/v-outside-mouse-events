@@ -21,7 +21,7 @@ import { directive } from "path/to//outside-events.js";
 
 ## usage
 
-### directives
+### script tag & directives
 
 ```html
 <div id="app">
@@ -32,8 +32,6 @@ import { directive } from "path/to//outside-events.js";
 </div>
 <script type="text/javascript" src="path/to/outside-events.js"></script>
 <script>
-
-  import { directive } from "path/to//outside-events.js";
 
   new Vue({
     el: "#app",
@@ -47,7 +45,6 @@ import { directive } from "path/to//outside-events.js";
     },
     directives: {
       "outside-click": window["v-outside-events"].directive
-      // "outside-click": directive
     }
 
   });
@@ -55,8 +52,7 @@ import { directive } from "path/to//outside-events.js";
 </script>
 
 ```
-
-### Vue.use
+### script tag & Vue.use
 
 ```html
 <div id="app">
@@ -68,10 +64,38 @@ import { directive } from "path/to//outside-events.js";
 <script type="text/javascript" src="path/to/outside-events.js"></script>
 <script>
 
-  import { directive } from "path/to//outside-events.js";
+  new Vue({
+    el: "#app",
+    methods: {
+      click: function(){
+        console.log("click");
+      },
+      clickOutside: function(){
+        console.log("click outside");
+      }
+    },
+    directives: {
+      "outside-click": window["v-outside-events"].directive
+    }
 
-  Vue.use(window["v-outside-events"].setOutsideEvent("click"));
-  // Vue.use(directive.setOutsideEvent("click"));
+  });
+
+</script>
+
+```
+
+### import & directives
+
+```html
+<div id="app">
+  <div><div>
+  <div @class="click" v-outside-click="clickOutside">
+    click me
+  </div>
+</div>
+```
+```javascript
+  import { directive } from "path/to//outside-events.js";
 
   new Vue({
     el: "#app",
@@ -82,10 +106,37 @@ import { directive } from "path/to//outside-events.js";
       clickOutside: function(){
         console.log("click outside");
       }
+    },
+    directives: {
+      "outside-click": directive
     }
-
   });
+```
+### import & Vue.use
 
-</script>
+```html
+<div id="app">
+  <div><div>
+  <div @class="click" v-outside-click="clickOutside">
+    click me
+  </div>
+</div>
+```
 
+```javascript
+  import { directive } from "path/to//outside-events.js";
+
+  Vue.use(directive.setOutsideEvent("click"));
+
+  new Vue({
+    el: "#app",
+    methods: {
+      click: function(){
+        console.log("click");
+      },
+      clickOutside: function(){
+        console.log("click outside");
+      }
+    },
+  });
 ```
