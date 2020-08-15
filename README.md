@@ -1,4 +1,4 @@
-# v-outside-events
+# v-outside-mouse-events
 
 Vue directive, mouse / touch event outside element.
 
@@ -140,3 +140,14 @@ import { directive } from "path/to//outside-events.js";
     },
   });
 ```
+
+## events
+
+  "outside-click"
+  "outside-mousedown"
+  "outside-mouseup"
+  "outside-mouseover"
+  "outside-mousemove"
+  "outside-touchstart"
+  "outside-touchend"
+
