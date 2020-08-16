@@ -2,7 +2,7 @@
   "name": "vue-mouse-event-outside",
   "version": "1.0.0",
   "description": "## usage",
-  "main": "app.js",
+  "main": "dist/outside-events.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack",
