@@ -41,7 +41,9 @@ const makeHandler = function(el, removeEvent){
       removeEvent(handler);
       return;
     }
-    const array = evt.path;
+    
+    const array = evt.path || (evt.composedPath && evt.composedPath());
+
     let exists = false;
     // let counter = 0;
     for(let i = 0; i < array.length; i++){
