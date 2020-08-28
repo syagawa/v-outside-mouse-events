@@ -22,7 +22,7 @@ new Vue({
     ]
   },
   methods: {
-    change(){
+    change: function(){
       this.outsides = [];
     },
     click: function(num){
