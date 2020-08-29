@@ -33,18 +33,14 @@ const makeAddEvent = function(eventname){
   return addEvent;
 };
 
-const makeHandler = function(el, removeEvent){
+const existsInParents = function(evt, tgt_area){
 
-  const handler = function(evt){
-    const tgt_area = el;
-    if(!tgt_area || tgt_area.length === 0){
-      removeEvent(handler);
-      return;
-    }
-    
-    const array = evt.path || (evt.composedPath && evt.composedPath());
+  const array = evt.path || (evt.composedPath && evt.composedPath());
 
-    let exists = false;
+  console.info(evt);
+
+  let exists = false;
+  if(array && array.length){
     // let counter = 0;
     for(let i = 0; i < array.length; i++){
       // counter++;
@@ -68,14 +64,41 @@ const makeHandler = function(el, removeEvent){
           }
         }
       }
-
       if(exists){
         break;
       }
+    }
+  }else{
+    let parent = evt.target.parentElement;
+    while(!exists){
+      if(parent === tgt_area){
+        exists = true;
+        break;
+      }
+      parent = parent.parentElement;
+      if(!parent){
+        break;
+      }
+      // const parent = 
 
     }
+
+  }
+  return exists;
+};
+
+const makeHandler = function(el, removeEvent){
+
+  const handler = function(evt){
+    const tgt_area = el;
+    if(!tgt_area || tgt_area.length === 0){
+      removeEvent(handler);
+      return;
+    }
+    
+    const exists = existsInParents(evt, tgt_area);
+
     if(!exists){
-      // cb();
       executeCallback(el);
     }
   };
