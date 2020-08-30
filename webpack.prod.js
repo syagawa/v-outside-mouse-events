@@ -28,10 +28,21 @@ module.exports = {
       },
       {
         test: /\.js$/,
-        exclude: /(node_modules)/,
+        exclude: /node_modules\/(?!(core-module)\/).*/,
         loader: "babel-loader",
         options: {
-          presets: ["@babel/preset-env"]
+          presets: [[
+            "@babel/preset-env",
+            {
+              targets: {
+                chrome: 80,
+                ie: 11,
+                esmodules: true,
+              },
+              useBuiltIns: "entry",
+              corejs: 3,
+            }
+          ]]
         }
       }
     ]
