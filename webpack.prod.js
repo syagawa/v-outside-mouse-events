@@ -10,7 +10,7 @@ module.exports = {
     filename: "outside-events.js",
     path: path.resolve(__dirname, "./dist"),
     library: 'v-outside-events',
-    libraryExport: "",
+    libraryExport: "default",
     libraryTarget: "umd",
     globalObject: "this"
   },
