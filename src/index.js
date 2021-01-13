@@ -4,6 +4,9 @@ import d from "./directive.js";
 
 export const directive = d;
 
+// import directive from "./directive.js";
+// export default directive;
+
 export const setOutsideEvent = function(type){
   const default_type = "click";
   let str = "outside-";
