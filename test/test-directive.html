@@ -26,7 +26,7 @@
         <div class="button" @touchstart="touchstart" v-outside-touchstart="touchstartOutside" v-if="default_event === 'touchstart'">
           touchstart
         </div>
-        <div class="button" v-outside-touchend="touchendOutside" v-if="default_event === 'touchend'">
+        <div class="button" @touchend="touchend" v-outside-touchend="touchendOutside" v-if="default_event === 'touchend'">
           touchend
         </div>
         <select v-model="default_event" @change="change">
@@ -35,7 +35,12 @@
       </div>
       <div class="sub">
         <ul>
-          <li v-for="message in outsides">
+          <li v-for="message in outsides" class="outside">
+            {{message}}
+          </li>
+        </ul>
+        <ul>
+          <li v-for="message in insides">
             {{message}}
           </li>
         </ul>
@@ -49,6 +54,7 @@
       el: "#app",
       data: {
         outsides: [],
+        insides: [],
         show: true,
         default_event: "click",
         options: [
@@ -67,33 +73,59 @@
       methods: {
         change: function(){
           this.outsides = [];
+          this.insides = [];
         },
         click: function(num){
           console.log("click");
+          var str = "click inside";
+          this.insides.push(str);
         },
         mousedown: function(num){
+          var str = "mousedown inside";
+          this.insides.push(str);
           console.log("mousedown");
         },
         mouseup: function(num){
+          var str = "mouseup inside";
+          this.insides.push(str);
           console.log("mouseup");
         },
         mouseover: function(num){
+          var str = "mouseover inside";
+          this.insides.push(str);
           console.log("mouseover");
         },
         mousemove: function(num){
+          var str = "mousemove inside";
+          this.insides.push(str);
+
           console.log("mousemove");
         },
         mouseleave: function(num){
+          var str = "mouseleave inside";
+          this.insides.push(str);
+
           console.log("mouseleave");
         },
         mouseout: function(num){
+          var str = "mouseout inside";
+          this.insides.push(str);
           console.log("mouseout");
         },
         mouseenter: function(num){
+          var str = "mouseenter inside";
+          this.insides.push(str);
           console.log("mouseenter");
         },
         touchstart: function(num){
+          var str = "touchstart inside";
+          this.insides.push(str);
           console.log("touchstart");
+        },
+        touchend: function(num){
+          var str = "touchend inside";
+          this.insides.push(str);
+          console.log("touchend");
         },
         clickOutside: function(num){
           var str = "Click outside !!";
@@ -194,6 +226,7 @@
     .sub{
       padding: 50px;
       justify-content: space-between;
+      display: flex;
     }
     .switch{
       cursor: pointer;
@@ -205,6 +238,9 @@
       transition: all 0.15s ease;
       box-sizing: border-box;
       border: 1px solid #ddd;
+    }
+    .outside{
+      color: #4fc08d;
     }
 
 

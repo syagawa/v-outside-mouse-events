@@ -24,7 +24,7 @@
         <div class="button" @touchstart="touchstart" v-outside-touchstart="touchstartOutside" v-if="default_event === 'touchstart'">
           touchstart
         </div>
-        <div class="button" v-outside-touchend="touchendOutside" v-if="default_event === 'touchend'">
+        <div class="button" @touchend="touchend" v-outside-touchend="touchendOutside" v-if="default_event === 'touchend'">
           touchend
         </div>
         <select v-model="default_event" @change="change">
@@ -33,7 +33,12 @@
       </div>
       <div class="sub">
         <ul>
-          <li v-for="message in outsides">
+          <li v-for="message in outsides" class="outside">
+            {{message}}
+          </li>
+        </ul>
+        <ul>
+          <li v-for="message in insides">
             {{message}}
           </li>
         </ul>
@@ -62,6 +67,7 @@
     .sub{
       padding: 50px;
       justify-content: space-between;
+      display: flex;
     }
     .switch{
       cursor: pointer;
@@ -74,7 +80,9 @@
       box-sizing: border-box;
       border: 1px solid #ddd;
     }
-
+    .outside{
+      color: #4fc08d;
+    }
 
   </style>
 
